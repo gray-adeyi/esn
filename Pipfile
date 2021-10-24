@@ -7,6 +7,10 @@ name = "pypi"
 django = "*"
 pillow = "*"
 gunicorn = "*"
+django-heroku = "*"
+django-storages = "*"
+psycopg2 = "*"
+boto3 = "*"
 
 [dev-packages]
 autopep8 = "*"

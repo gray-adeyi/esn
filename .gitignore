@@ -1,3 +1,4 @@
 *.pyc
 db.sqlite3
-envvars.zsh
+*.zsh
+esn-data

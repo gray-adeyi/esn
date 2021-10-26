@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% block title %}Engineering Student Network{% endblock %}
+{% block title %}{{ site.name }} | Home{% endblock %}
 
 {% block container %}
 <!-- ======= Hero Section ======= -->
@@ -532,45 +532,22 @@
         <div class="col-lg-6">
           <!-- F.A.Q List 1-->
           <div class="accordion accordion-flush" id="faqlist1">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                  Non consectetur a erat nam at lectus urna duis?
-                </button>
-              </h2>
-              <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                <div class="accordion-body">
-                  Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-                </div>
+            {% for faq in site.faqs.all %}
+          {% if not forloop.counter|divisibleby:2 %}
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-{{ faq.pk }}">
+                {{ faq.question }}
+              </button>
+            </h2>
+            <div id="faq-content-{{ faq.pk }}" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+              <div class="accordion-body">
+                {{ faq.answer }}
               </div>
             </div>
-
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                  Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?
-                </button>
-              </h2>
-              <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                <div class="accordion-body">
-                  Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                  Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?
-                </button>
-              </h2>
-              <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                <div class="accordion-body">
-                  Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-                </div>
-              </div>
-            </div>
-
+          </div>
+          {% endif %}
+          {% endfor %}
           </div>
         </div>
 
@@ -578,46 +555,22 @@
 
           <!-- F.A.Q List 2-->
           <div class="accordion accordion-flush" id="faqlist2">
-
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-1">
-                  Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
-                </button>
-              </h2>
-              <div id="faq2-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                <div class="accordion-body">
-                  Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                </div>
+            {% for faq in site.faqs.all %}
+          {% if forloop.counter|divisibleby:2 %}
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-{{ faq.pk }}">
+                {{ faq.question }}
+              </button>
+            </h2>
+            <div id="faq2-content-{{ faq.pk }}" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
+              <div class="accordion-body">
+                {{ faq.answer }}
               </div>
             </div>
-
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-2">
-                  Tempus quam pellentesque nec nam aliquam sem et tortor consequat?
-                </button>
-              </h2>
-              <div id="faq2-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                <div class="accordion-body">
-                  Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-3">
-                  Varius vel pharetra vel turpis nunc eget lorem dolor?
-                </button>
-              </h2>
-              <div id="faq2-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                <div class="accordion-body">
-                  Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
-                </div>
-              </div>
-            </div>
-
+          </div>
+          {% endif %}
+          {% endfor %}
           </div>
         </div>
 
@@ -890,87 +843,30 @@
 
       <header class="section-header">
         <h2>Team</h2>
-        <p>Our hard working team</p>
+        <p>Our hard working team leads</p>
       </header>
 
       <div class="row gy-4">
 
+        {% for lead in site.team_leads.all %}
         <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
           <div class="member">
             <div class="member-img">
-              <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+              {% if lead.photo %}<img src="{{ lead.photo.url }}" class="img-fluid" alt="">{% endif %}
               <div class="social">
-                <a href=""><i class="bi bi-twitter"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
+                {% for account in lead.social_accounts.all %}
+                <a href="{{ account.url }}"><i class="bi bi-{{ account.name }}"></i></a>
+                {% endfor %}
               </div>
             </div>
             <div class="member-info">
-              <h4>Walter White</h4>
-              <span>Chief Executive Officer</span>
-              <p>Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut. Ipsum exercitationem iure minima enim corporis et voluptate.</p>
+              <h4>{{ lead.fullname }}</h4>
+              <span>{{ lead.title }}</span>
+              <p>{{ lead.blockquote }}</p>
             </div>
           </div>
         </div>
-
-        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-          <div class="member">
-            <div class="member-img">
-              <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-              <div class="social">
-                <a href=""><i class="bi bi-twitter"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-            <div class="member-info">
-              <h4>Sarah Jhonson</h4>
-              <span>Product Manager</span>
-              <p>Quo esse repellendus quia id. Est eum et accusantium pariatur fugit nihil minima suscipit corporis. Voluptate sed quas reiciendis animi neque sapiente.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-          <div class="member">
-            <div class="member-img">
-              <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
-              <div class="social">
-                <a href=""><i class="bi bi-twitter"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-            <div class="member-info">
-              <h4>William Anderson</h4>
-              <span>CTO</span>
-              <p>Vero omnis enim consequatur. Voluptas consectetur unde qui molestiae deserunt. Voluptates enim aut architecto porro aspernatur molestiae modi.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
-          <div class="member">
-            <div class="member-img">
-              <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
-              <div class="social">
-                <a href=""><i class="bi bi-twitter"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-            <div class="member-info">
-              <h4>Amanda Jepson</h4>
-              <span>Accountant</span>
-              <p>Rerum voluptate non adipisci animi distinctio et deserunt amet voluptas. Quia aut aliquid doloremque ut possimus ipsum officia.</p>
-            </div>
-          </div>
-        </div>
-
+        {% endfor %}
       </div>
 
     </div>
@@ -983,8 +879,8 @@
     <div class="container" data-aos="fade-up">
 
       <header class="section-header">
-        <h2>Our Clients</h2>
-        <p>Temporibus omnis officia</p>
+        <h2>Our Sponsors</h2>
+        <p></p>
       </header>
 
       <div class="clients-slider swiper">
@@ -1011,7 +907,7 @@
 
       <header class="section-header">
         <h2>Blog</h2>
-        <p>Recent posts form our Blog</p>
+        <p>Recent posts from our Blog</p>
       </header>
 
       <div class="row">
@@ -1068,28 +964,28 @@
               <div class="info-box">
                 <i class="bi bi-geo-alt"></i>
                 <h3>Address</h3>
-                <p>A108 Adam Street,<br>New York, NY 535022</p>
+                <p>{{ site.address }}</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="info-box">
                 <i class="bi bi-telephone"></i>
                 <h3>Call Us</h3>
-                <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                <p>{% for number in site.numbers.all %}<a href="tel:{{ number.number}}">{{ number.number}}</a><br>{% endfor %}</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="info-box">
                 <i class="bi bi-envelope"></i>
                 <h3>Email Us</h3>
-                <p>info@example.com<br>contact@example.com</p>
+                <p><a href="mailto:{{ site.email }}"></a></p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="info-box">
                 <i class="bi bi-clock"></i>
-                <h3>Open Hours</h3>
-                <p>Monday - Friday<br>9:00AM - 05:00PM</p>
+                <h3>Meetings</h3>
+                <p>Fridays<br></p>
               </div>
             </div>
           </div>

@@ -18,6 +18,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from apps.coming_soon.views import SoonView
+import apps.core.views
+
+handler404 = apps.core.views.handler404
+handler500 = apps.core.views.handler500
 
 urlpatterns = [
     path('admin/', admin.site.urls),

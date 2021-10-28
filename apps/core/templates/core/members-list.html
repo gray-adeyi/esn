@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+{% block title %}Members list{% endblock %}
+
+{% block container %}
+<main id="main">
+    <br><br><br><br>
+    <div class="container">
+        <div class="row">
+            <h3>{{ site.name }} Members list <a href="{% url 'core:download-list' %}?format=xlsx&names=merged" class="right btn btn-success">Download as Excel sheet</a></h3>
+            
+            {% for member in members %}
+            <div class="col-md-3 col-sm-12">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ member.passport.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ member.get_fullname }}</h5>
+                      <p class="card-text"><b>Fullname: </b>{{ member.get_fullname }}<br>
+                        <b>Department </b>{{ member.get_department_display }}<br>
+                        <b>Position </b>{{ member.position }}
+                        <b>Team: </b>{{ member.get_team_display }}
+                    </p>
+                      <a href="{{ member.passport.url }}" class="btn btn-primary" download>Download image</a>
+                    </div>
+                  </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}

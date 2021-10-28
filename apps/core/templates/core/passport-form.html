@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+{% block title %}Passport Form{% endblock %}
+
+{% block container %}
+<br><br><br><br>
+<main id="main">
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            {% for message in messages %}
+            <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %}">{{ message.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        {% if member %}<div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <img src="{{ member.passport.url }}" alt="" class="img-fluid">
+                    <p><b>Firstname:</b> {{ member.firstname }}</p>
+                    <p><b>Lastname:</b> {{ member.lastname }}</p>
+                    <p><b>Team:</b> {{ member.get_team_display }}</p>
+                    <p><b>Department:</b> {{ member.get_department_display }}</p>
+                </div>
+            </div>
+        </div>{% endif %}
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h1>Passport Information Form</h1>
+                    <form action="{% url 'core:passport-info' %}" method="post" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Upload Information</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+{% endblock %}

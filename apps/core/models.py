@@ -106,3 +106,44 @@ class SiteSocialAccount(SocialAccount):
 class TeamLeadSocialAccount(SocialAccount):
     site = models.ForeignKey(
         TeamLead, related_name='social_accounts', on_delete=models.CASCADE)
+
+
+class Member(models.Model):
+    """
+    This models stores the members info for the 
+    passport.
+    """
+    DEPARTMENT_OPTIONS = (
+        ('civil engr', 'Civil Engineering'),
+        ('mech engr', 'Mechanical Engineering'),
+        ('elect engr', 'Electrical Engineering'),
+        ('Computer engr', 'Computer Engineering'),
+    )
+    TEAM_OPTIONS = (
+        ('0','Media Team'),
+        ('1', 'Research Team'),
+        ('2', 'Logistics Team'),
+        ('3','Project Supervision Team'),
+        ('4', 'Finance Team'),
+        ('5', 'Departmental Team'),
+        ('6','Design and Creative Team'),
+        ('7','Purchase Team'),
+        ('8', 'Organizing Team'),
+        ('9', 'Project Team'),
+        ('10', 'Campus Team'),
+    )
+    
+    lastname = models.CharField(
+        max_length=100, help_text='your surname')
+    firstname = models.CharField(
+        max_length=100, help_text='your name')
+    department = models.CharField(max_length=50, choices=DEPARTMENT_OPTIONS)
+    position = models.CharField(max_length=50, default='Nil')
+    team = models.CharField(max_length=30, choices=TEAM_OPTIONS)
+    passport = models.ImageField(help_text='Strictly your pasport photograph')
+
+    def __str__(self) -> str:
+        return  self.get_fullname()
+
+    def get_fullname(self):
+        return self.lastname + " " + self.firstname

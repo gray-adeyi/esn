@@ -11,6 +11,7 @@ django-heroku = "*"
 django-storages = "*"
 psycopg2 = "*"
 boto3 = "*"
+openpyxl = "*"
 
 [dev-packages]
 autopep8 = "*"

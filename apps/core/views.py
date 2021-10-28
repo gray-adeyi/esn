@@ -66,7 +66,7 @@ def download_members_list(request):
         member.firstname.upper(),
         member.position.upper(),
         member.get_team_display().upper(),
-        f"{settings.MEDIA_URL[:-1]}{member.passport.url}") for idx, member in enumerate(members_list)]
+        member.passport.url) for idx, member in enumerate(members_list)]
     logger.debug(members)
     if request.GET.get("format") == "xlsx":
         wb=Workbook()
@@ -91,7 +91,7 @@ def download_members_list(request):
         member.get_fullname().upper(),
         member.position.upper(),
         member.get_team_display().upper(),
-        f"{settings.MEDIA_URL[:-1]}{member.passport.url}") for idx, member in enumerate(members_list)]
+        member.passport.url) for idx, member in enumerate(members_list)]
             # to populate the excel sheet.
             for index, row in enumerate(sheet.iter_rows(min_row=1, max_col=5, max_row=len(members_name_merged) + 1)):
                 if index == 0:

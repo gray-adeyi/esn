@@ -64,6 +64,7 @@ def download_members_list(request):
         idx + 1,
         member.lastname.upper(),
         member.firstname.upper(),
+        member.othername.upper(),
         member.position.upper(),
         member.get_team_display().upper(),
         member.passport.url) for idx, member in enumerate(members_list)]
@@ -75,6 +76,7 @@ def download_members_list(request):
         headers=['S/N',
                    'Lastname',
                    'Firstname',
+                   'Othername',
                    'Position',
                    'Team',
                    'Passport']  # Headers if names are required to be discrete.
@@ -104,7 +106,7 @@ def download_members_list(request):
                                value=members_name_merged[row-2][idx])
 
         else:  # alternate logic if names are required to be discrete.
-            for index, row in enumerate(sheet.iter_rows(min_row=1, max_col=6, max_row=len(members) + 1)):
+            for index, row in enumerate(sheet.iter_rows(min_row=1, max_col=7, max_row=len(members) + 1)):
                 if index == 0:
                     for idx, cell in enumerate(row):
                         cell.value=headers[idx]

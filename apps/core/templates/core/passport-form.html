@@ -4,39 +4,90 @@
 {% block container %}
 <br><br><br><br>
 <main id="main">
-<div class="container">
-    <div class="row">
-        <div class="col-6">
-            {% for message in messages %}
-            <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %}">{{ message.message }}</div>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="row">
-        {% if member %}<div class="col-md-6 col-sm-12">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{ member.passport.url }}" alt="" class="img-fluid">
-                    <p><b>Firstname:</b> {{ member.firstname }}</p>
-                    <p><b>Lastname:</b> {{ member.lastname }}</p>
-                    <p><b>Team:</b> {{ member.get_team_display }}</p>
-                    <p><b>Department:</b> {{ member.get_department_display }}</p>
-                </div>
-            </div>
-        </div>{% endif %}
-        <div class="col-md-6 col-sm-12">
-            <div class="card">
-                <div class="card-body">
-                    <h1>Passport Information Form</h1>
-                    <form action="{% url 'core:passport-info' %}" method="post" enctype='multipart/form-data'>
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit" class="btn btn-primary">Upload Information</button>
-                    </form>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                {% for message in messages %}
+                <div
+                    class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %}">
+                    {{ message.message }}</div>
+                {% endfor %}
             </div>
         </div>
+        <div class="row">
+            {% if member %}<div class="col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="{{ member.passport.url }}" alt="" class="img-fluid">
+                        <p><b>Firstname:</b> {{ member.firstname }}</p>
+                        <p><b>Lastname:</b> {{ member.lastname }}</p>
+                        <p><b>Othername:</b> {{ member.othername }}</p>
+                        <p><b>Team:</b> {{ member.get_team_display }}</p>
+                        <p><b>Department:</b> {{ member.get_department_display }}</p>
+                    </div>
+                </div>
+            </div>{% endif %}
+            <div class="col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h1>Passport Information Form</h1>
+                        <form action="{% url 'core:passport-info' %}" method="post" enctype='multipart/form-data'>
+                            {% csrf_token %}
+                            {% if form.errors %}<div class="alert alert-danger">{{ form.errors }}</div>{% endif %}
+                            <div class="form-group">
+                                <label for="id_lastname">Lastname</label>
+                                <input type="text" name="lastname" maxlength="100" required id="id_lastname"
+                                    class="form-control" placeholder="{{ form.lastname.help_text }}">
+                            </div>
+                            <div class="form-group pt-3">
+                                <label for="id_firstname">Firstname</label>
+                                <input type="text" name="firstname" maxlength="100" required id="id_firstname"
+                                    class="form-control" placeholder="{{ form.firstname.help_text }}">
+                            </div>
+                            <div class="form-group pt-3">
+                                <label for="id_othername">Othername</label>
+                                <input type="text" name="othername" maxlength="100" required id="id_othername"
+                                    class="form-control" placeholder="{{ form.othername.help_text }}">
+                            </div>
+
+                            <div class="form-group pt-3">
+                                <label for="rank">Department</label>
+                                <select class="form-control" name="department" required id="id_department">
+                                    {% for x, y in form.fields.department.choices %}
+                                    <option value="{{ x }}" {% if form.fields.department.value == x %} selected{% endif %}>{{ y }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+
+                            <div class="form-group pt-3">
+                                <label for="id_position">Position</label>
+                                <input type="text" name="position" value="{{ form.position.value }}" maxlength="50"
+                                    required id="id_position" class="form-control" placeholder="post held">
+                            </div>
+
+                            <div class="form-group pt-3">
+                                <label for="rank">Team</label>
+                                <select class="form-control" name="team" required id="id_team">
+                                    {% for x, y in form.fields.team.choices %}
+                                    <option value="{{ x }}" {% if form.fields.team.value == x %} selected{% endif %}>{{ y }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group pt-3">
+                                <label for="id_passport">Passport Photograph</label>
+                                <input type="file" name="passport" accept="image/*" required id="id_passport"
+                                    class="form-control">
+                                <i class="text-danger">{{ form.passport.help_text }}</i>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary mt-2">Upload Information</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 </main>
 {% endblock %}

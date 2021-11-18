@@ -13,8 +13,12 @@
         <h2 data-aos="fade-up" data-aos-delay="400">ESN is a platform strictly for engineering students to come together to make use of our God given talents and knowledge to make the world a better place, It will be a place of transformation and to bring out the innovative and creative us. </h2>
         <div data-aos="fade-up" data-aos-delay="600">
           <div class="text-center text-lg-start">
-            <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-              <span>Sign up</span>
+            <a href="{% url 'core:passport-info' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+              <span>Upload ID Card data</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+            <a href="{% url 'core:member-list' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+              <span>View member's list</span>
               <i class="bi bi-arrow-right"></i>
             </a>
           </div>

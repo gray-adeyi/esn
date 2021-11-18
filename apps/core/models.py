@@ -134,16 +134,19 @@ class Member(models.Model):
     )
     
     lastname = models.CharField(
-        max_length=100, help_text='your surname')
+        max_length=100, help_text='Your surname')
     firstname = models.CharField(
-        max_length=100, help_text='your name')
+        max_length=100, help_text='Your name')
+    othername = models.CharField(
+        max_length=100, help_text="Your middle name"
+    )
     department = models.CharField(max_length=50, choices=DEPARTMENT_OPTIONS)
     position = models.CharField(max_length=50, default='Nil')
     team = models.CharField(max_length=30, choices=TEAM_OPTIONS)
-    passport = models.ImageField(help_text='Strictly your pasport photograph')
+    passport = models.ImageField(help_text='Strictly your pasport photograph on a white background')
 
     def __str__(self) -> str:
         return  self.get_fullname()
 
     def get_fullname(self):
-        return self.lastname + " " + self.firstname
+        return f"{self.lastname} {self.firstname} {self.othername}"

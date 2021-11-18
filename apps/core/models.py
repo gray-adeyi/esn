@@ -149,4 +149,4 @@ class Member(models.Model):
         return  self.get_fullname()
 
     def get_fullname(self):
-        return f"{self.lastname} {self.firstname} {self.othername}"
+        return f"{self.lastname} {self.firstname} {self.othername}".title()

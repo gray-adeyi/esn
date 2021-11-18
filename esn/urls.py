@@ -25,8 +25,7 @@ handler500 = apps.core.views.handler500
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', SoonView.as_view(), name='coming_soon'),
-    path('core/', include('apps.core.urls')),
+    path('', include('apps.core.urls')),
     path('blog/', include('apps.blog.urls')),
 ]
 

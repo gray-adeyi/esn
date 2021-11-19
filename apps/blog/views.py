@@ -5,6 +5,8 @@ from . import models
 class BlogIndex(ListView):
     template_name = 'blog/blog.html'
     model = models.Post
+    context_object_name = 'posts'
+    paginate_by =  10
 
 
 class BlogPost(DetailView):

@@ -24,6 +24,8 @@
                         <p><b>Othername:</b> {{ member.othername }}</p>
                         <p><b>Team:</b> {{ member.get_team_display }}</p>
                         <p><b>Department:</b> {{ member.get_department_display }}</p>
+                        <p><b>Phone number[s]:</b> {{ member.join_numbers }}</p>
+                        <p><b class="text-danger">For errors in the data supplied, please contact the media team</b></p>
                     </div>
                 </div>
             </div>{% endif %}
@@ -48,6 +50,16 @@
                                 <label for="id_othername">Othername</label>
                                 <input type="text" name="othername" maxlength="100" required id="id_othername"
                                     class="form-control" placeholder="{{ form.othername.help_text }}">
+                            </div>
+                            <div class="form-group pt-3">
+                                <label for="id_othername">Phone number</label>
+                                <input type="tel" name="phone_number1" maxlength="100" required id="id_phone_number1"
+                                    class="form-control" placeholder="your active number">
+                            </div>
+                            <div class="form-group pt-3">
+                                <label for="id_othername">Other Phone number</label>
+                                <input type="tel" name="phone_number2" maxlength="100" id="id_phone_number2"
+                                    class="form-control" placeholder="{{ form.phone_number2.help_text }}">
                             </div>
 
                             <div class="form-group pt-3">

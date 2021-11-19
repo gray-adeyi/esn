@@ -17,7 +17,8 @@
                       <p class="card-text"><b>Fullname: </b>{{ member.get_fullname }}<br>
                         <b>Department </b>{{ member.get_department_display }}<br>
                         <b>Position </b>{{ member.position }}<br>
-                        <b>Team: </b>{{ member.get_team_display }}
+                        <b>Team: </b>{{ member.get_team_display }}<br>
+                        <b>Phone Number[s]: </b>{{ member.join_numbers }}
                     </p>
                       <a href="{{ member.passport.url }}" class="btn btn-primary" download>Download image</a>
                     </div>

@@ -65,6 +65,7 @@ def download_members_list(request):
         member.lastname.upper(),
         member.firstname.upper(),
         member.othername.upper(),
+        member.join_numbers(),
         member.position.upper(),
         member.get_team_display().upper(),
         member.passport.url) for idx, member in enumerate(members_list)]
@@ -77,11 +78,13 @@ def download_members_list(request):
                    'Lastname',
                    'Firstname',
                    'Othername',
+                   'Phone Number',
                    'Position',
                    'Team',
                    'Passport']  # Headers if names are required to be discrete.
         headers_name_merged=['S/N',
                    'Fullname',
+                   'Phone Number',
                    'Position',
                    'Team',
                    'Passport']  # Headers if names are required to be merged.
@@ -91,11 +94,12 @@ def download_members_list(request):
             members_name_merged=[(
         idx + 1,
         member.get_fullname().upper(),
+        member.join_numbers(),
         member.position.upper(),
         member.get_team_display().upper(),
         member.passport.url) for idx, member in enumerate(members_list)]
             # to populate the excel sheet.
-            for index, row in enumerate(sheet.iter_rows(min_row=1, max_col=5, max_row=len(members_name_merged) + 1)):
+            for index, row in enumerate(sheet.iter_rows(min_row=1, max_col=6, max_row=len(members_name_merged) + 1)):
                 if index == 0:
                     for idx, cell in enumerate(row):
                         cell.value=headers_name_merged[idx]
@@ -106,7 +110,7 @@ def download_members_list(request):
                                value=members_name_merged[row-2][idx])
 
         else:  # alternate logic if names are required to be discrete.
-            for index, row in enumerate(sheet.iter_rows(min_row=1, max_col=7, max_row=len(members) + 1)):
+            for index, row in enumerate(sheet.iter_rows(min_row=1, max_col=8, max_row=len(members) + 1)):
                 if index == 0:
                     for idx, cell in enumerate(row):
                         cell.value=headers[idx]

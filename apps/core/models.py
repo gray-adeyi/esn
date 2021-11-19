@@ -141,6 +141,8 @@ class Member(models.Model):
         max_length=100, help_text="Your middle name"
     )
     department = models.CharField(max_length=50, choices=DEPARTMENT_OPTIONS)
+    phone_number1 = models.CharField(max_length=15, blank=True, default='Nil')
+    phone_number2 = models.CharField(max_length=15, blank=True, default='Nil', help_text="*optional")
     position = models.CharField(max_length=50, default='Nil')
     team = models.CharField(max_length=30, choices=TEAM_OPTIONS)
     passport = models.ImageField(help_text='Strictly your pasport photograph on a white background')
@@ -150,3 +152,10 @@ class Member(models.Model):
 
     def get_fullname(self):
         return f"{self.lastname} {self.firstname} {self.othername}".title()
+
+    def join_numbers(self):
+        if self.phone_number1 =='Nil' and self.phone_number2 =='Nil':
+            return 'Nil'
+        elif self.phone_number1 !='Nil' and self.phone_number2 =='Nil':
+            return self.phone_number1
+        return " ,".join([self.phone_number1,self.phone_number2])

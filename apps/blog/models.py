@@ -52,7 +52,7 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     update_on = models.DateTimeField(auto_now=True)
     state = models.CharField(max_length=20, choices=OPTIONS)
-    tags = models.ManyToManyField(Tag,)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self) -> str:
         return self.title

@@ -49,6 +49,8 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     authors = models.ManyToManyField(Author)
     poster = models.ImageField(blank=True)
+    brief = models.CharField(
+        max_length=200, help_text="Optional* A summary of what the post is about", blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     update_on = models.DateTimeField(auto_now=True)
     state = models.CharField(max_length=20, choices=OPTIONS)

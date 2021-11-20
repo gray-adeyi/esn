@@ -1,6 +1,41 @@
 from django.db import models
+import logging
+from io import BytesIO
+from PIL import Image
+from django.core.files.base import ContentFile
 
-# Create your models here.
+logger = logging.getLogger(__name__)
+
+class ImageCompressMixin:
+    """
+    Mixin to compress models
+    `ImageField`
+    """
+
+    def _compress_img(self, img, quality=20, format='JPEG'):
+        """
+        Function helps in the reduction of image
+        quality
+        """
+        logger.info("Compressing image")
+        img = Image.open(img)
+        compressed_img = BytesIO()
+        img.save(compressed_img, quality=quality, format=format)
+        compressed_img.seek(0)
+        return compressed_img
+
+    def compress_img(self, field):
+        """
+        Compresses the image of the
+        field specified
+        """
+        compressed = self._compress_img(img=field)
+        field.save(
+                field.name,
+                ContentFile(compressed.read()),
+                save=False,
+            )
+        compressed.close()
 
 
 class Site(models.Model):
@@ -108,7 +143,7 @@ class TeamLeadSocialAccount(SocialAccount):
         TeamLead, related_name='social_accounts', on_delete=models.CASCADE)
 
 
-class Member(models.Model):
+class Member(ImageCompressMixin, models.Model):
     """
     This models stores the members info for the 
     passport.
